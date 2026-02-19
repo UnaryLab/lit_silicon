@@ -11,6 +11,13 @@ modules:
     # model to run
     model: llama3.1_8B.yaml
     overrides:
+      profiling:
+        enable_profiling: true
+        save_traces_folder: "profile_trace"
+        profile_freq: 10
+        enable_memory_snapshot: false
+        save_memory_snapshot_folder: "memory_snapshot"
+
       sink_level: null
       file_sink_level: DEBUG
       stderr_sink_level: INFO
@@ -24,10 +31,12 @@ modules:
         warmup_steps: 10
 
       training:
-        local_batch_size: 4
-        seq_len: 8192
+        # local_batch_size: 4
+        # seq_len: 8192
+        local_batch_size: 2
+        seq_len: 4096
         mock_data: false
-        steps: 50
+        steps: 1000
 
       activation_checkpoint:
         mode: "none"  # ["none", "selective", "full"]
