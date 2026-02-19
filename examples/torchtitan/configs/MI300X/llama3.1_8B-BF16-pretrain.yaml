@@ -17,6 +17,8 @@ modules:
         profile_freq: 10
         enable_memory_snapshot: false
         save_memory_snapshot_folder: "memory_snapshot"
+      compile:
+        enable: false
 
       sink_level: null
       file_sink_level: DEBUG
@@ -31,7 +33,7 @@ modules:
         warmup_steps: 10
 
       training:
-        # local_batch_size: 4
+        # local_batch_size: 2
         # seq_len: 8192
         local_batch_size: 2
         seq_len: 4096
