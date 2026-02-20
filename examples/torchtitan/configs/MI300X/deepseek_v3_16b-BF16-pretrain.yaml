@@ -69,7 +69,7 @@ modules:
         selective_ac_option: "op" # 'int' = ac every positive int layer or 'op', ac based on ops policy
 
       compile:
-        enable: false
+        enable: true
         components: ["model", "loss"]     # ["model", "loss"]
 
       primus_turbo:

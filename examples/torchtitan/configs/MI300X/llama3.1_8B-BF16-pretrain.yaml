@@ -18,7 +18,7 @@ modules:
         enable_memory_snapshot: false
         save_memory_snapshot_folder: "memory_snapshot"
       compile:
-        enable: false
+        enable: true
 
       sink_level: null
       file_sink_level: DEBUG
