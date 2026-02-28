@@ -17,6 +17,7 @@ modules:
         profile_freq: 10
         enable_memory_snapshot: false
         save_memory_snapshot_folder: "memory_snapshot"
+        power_man: true
       compile:
         enable: true
 

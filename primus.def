@@ -1,0 +1,5 @@
+Bootstrap: docker
+From: rocm/primus:v26.1
+
+%post
+	pip install grpcio grpcio-tools

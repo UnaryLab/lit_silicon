@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package power;
+
+service PowerServer {
+  rpc SetPower(PowerReq) returns (PowerAck) {}
+}
+
+message PowerReq {
+  int32 gpu = 1;
+  int32 watts = 2;
+}
+
+message PowerAck {
+  int32 ack = 1;
+}
