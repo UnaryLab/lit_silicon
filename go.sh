@@ -15,8 +15,13 @@ trap 'pkill -P $$; exit' SIGINT SIGTERM
 
 SIF_FILE=primus.sif
 
-CONFIG="examples/torchtitan/configs/MI300X/deepseek_v3_16b-BF16-pretrain.yaml"
-# CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain.yaml"
+MODEL="${1:-llama}"
+
+if [[ "$1" == "llama" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain.yaml"
+else
+  CONFIG="examples/torchtitan/configs/MI300X/deepseek_v3_16b-BF16-pretrain.yaml"
+fi
 
 export APPTAINERENV_HF_TOKEN=$HF_TOKEN
 export APPTAINERENV_OMP_NUM_THREADS=32
@@ -27,16 +32,22 @@ POWER_PID=$!
 
 sleep 3 # wait for server to start
 
-python -m chopper.profile.collect --gpu-telemetry --cpu-telemetry -- apptainer exec --writable-tmpfs --rocm --bind $PWD/aiter_build:/workspace/aiter/aiter/jit/build --bind $PWD:/workspace/Primus $SIF_FILE bash -c "cd /workspace/Primus && ./runner/primus-cli direct -- train pretrain --config $CONFIG"
+python -m chopper.profile.collect \
+  --gpu-telemetry \
+  --cpu-telemetry \
+  --output-dir "${MODEL}_telemetry" \
+  -- \
+  apptainer exec \
+  --writable-tmpfs \
+  --rocm \
+  --bind $PWD:/workspace/Primus \
+  $SIF_FILE \
+  bash -c "cd /workspace/Primus && ./runner/primus-cli direct -- train pretrain --config $CONFIG"
 
 kill $POWER_PID
+wait $POWER_PID || true 2> /dev/null # idk if neccessary
 
-wait $POWER_PID 2> /dev/null # idk if neccessary
-
-# mv outputs deepseek_tuned_outputs
-# mv outputs llama_tuned_outputs
-# mkdir llama_tuned
-# mv gpu.pkl cpu.pkl llama_tuned
-# ./chopper.sh llama_tuned_outputs
-# mv ts.pkl llama_tuned
-# rm *.pkl
+cd outputs/${MODEL}_profile_trace/
+../../chopper.sh .
+rm iteration_*.pkl
+cp ../../${MODEL}_telemetry/*.pkl .

@@ -4,9 +4,7 @@
 ##SBATCH --error=sbatch_primus_%j.err
 #SBATCH -N 1
 #SBATCH -t 4:00:00
-#SBATCH -p mi3008x
-#SBATCH -q alloc_diwu_04012025_03312026
-#SBATCH -w k002-003
+#SBATCH -p mi2104x
 #SBATCH --exclusive
 
 set -eux

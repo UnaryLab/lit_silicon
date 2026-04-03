@@ -12,7 +12,7 @@ killall() {
   echo "** DONE **"
 }
 
-for iter in ./$1/profile_trace/*; do
+for iter in ./$1/*; do
   python -m chopper.profile.merge -t $iter/*.json -o $(basename $iter).pkl &
 done
 wait
