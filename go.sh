@@ -15,16 +15,20 @@ trap 'pkill -P $$; exit' SIGINT SIGTERM
 
 SIF_FILE=primus.sif
 
-MODEL="${1:-llama}"
-
-if [[ "$1" == "llama" ]]; then
-  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain.yaml"
+if [[ "$1" == "llama_red" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-GPU-Red.yaml"
+elif [[ "$1" == "llama_realloc" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-GPU-Realloc.yaml"
+elif [[ "$1" == "llama_slosh" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-CPU-Slosh.yaml"
+elif [[ "$1" == "deepseek_red" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/deepseek_v3_16b-BF16-pretrain-GPU-Red.yaml"
 else
-  CONFIG="examples/torchtitan/configs/MI300X/deepseek_v3_16b-BF16-pretrain.yaml"
+  echo "Unknown config requested"
+  exit 1
 fi
 
 export APPTAINERENV_HF_TOKEN=$HF_TOKEN
-export APPTAINERENV_OMP_NUM_THREADS=32
 export APPTAINERENV_TORCHINDUCTOR_COMPILE_THREADS=1
 
 ./power_server.py &
@@ -35,7 +39,7 @@ sleep 3 # wait for server to start
 python -m chopper.profile.collect \
   --gpu-telemetry \
   --cpu-telemetry \
-  --output-dir "${MODEL}_telemetry" \
+  --output-dir "${1}_telemetry" \
   -- \
   apptainer exec \
   --writable-tmpfs \
@@ -47,7 +51,7 @@ python -m chopper.profile.collect \
 kill $POWER_PID
 wait $POWER_PID || true 2> /dev/null # idk if neccessary
 
-cd outputs/${MODEL}_profile_trace/
+cd outputs/${1}_profile_trace/
 ../../chopper.sh .
 rm iteration_*.pkl
-cp ../../${MODEL}_telemetry/*.pkl .
+cp ../../${1}_telemetry/*.pkl .
