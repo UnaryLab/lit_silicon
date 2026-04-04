@@ -58,6 +58,15 @@ You can monitor progress with `tail -f sbatch_primus_*.out`.
 
 ## Collect Pretraining traces
 
+### Huggingface
+
+Request access to [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B).
+Make sure to export your huggingface key.
+
+```bash
+export HF_TOKEN=<key>
+```
+
 Submit both jobs and wait for completion.
 
 ```bash
@@ -68,9 +77,11 @@ sbatch -q account_name go.sh deepseek
 ## Generate figures
 
 ```bash
-python -m chopper.plots.average_power_freq -g "['outputs/deepseek_profile_trace/gpu.pkl','outputs/llama_profile_trace/gpu.pkl']" -v "['deepseek','llama']" --starts "[0.1,0.1]" --stops "[0.95,0.95]" --ymaxs "[1.03,1.005]" --ymins "[1,.955]" -p True -f deepseek_llama_avg_pow_freq
+python -m chopper.plots.average_power_freq -g "['outputs/deepseek_profile_trace/gpu.pkl','outputs/llama_profile_trace/gpu.pkl']" -v "['deepseek','llama']" --starts "[0.1,0.1]" --stops "[0.95,0.95]" --ymaxs "[1.03,1.005]" --ymins "[1,.955]" -p True -f deepseek_llama_avg_pow_freq.png
+python -m chopper.plots.lead_and_throughput -t "['outputs/deepseek_profile_trace/ts.pkl','outputs/llama_profile_trace/ts.pkl']" --frameworks "[2,2]" -v "['deepseek','llama']" --filename deepseek_llama_lead_and_throughput.png
 ```
 
 # TODO
 
--[ ] add HF_TOKEN stuff
+- [ ] add GPU-Realloc vs GPU-Red vs CPU-Slosh
+- [ ] add final power distribution
