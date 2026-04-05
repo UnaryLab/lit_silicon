@@ -5,7 +5,7 @@
 Choose either method to download the artifact.
 Hotfixes will be applied to the github version, please use the updated README.
 
-#### Zendo
+### Zendo
 
 Copy the artifact to the hpcfund cluster.
 The username will be provided once access has been configured for reviewers.
@@ -18,7 +18,7 @@ tar -xzvf artifact.tar.gz
 cd artifact
 ```
 
-#### GitHub
+### GitHub
 
 Clone the repository with submodules
 
@@ -29,7 +29,7 @@ cd Primus
 
 Set up a python virtual environment
 
-#### Python Environment
+### Python Environment
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -43,7 +43,7 @@ Install chopper
 uv pip install third_party/chopper
 ```
 
-#### Huggingface
+### Huggingface
 
 Request access to [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B).
 Make sure to export your huggingface key.

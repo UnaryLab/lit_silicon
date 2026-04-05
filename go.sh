@@ -39,7 +39,6 @@ sleep 3 # wait for server to start
 
 python -m chopper.profile.collect \
   --gpu-telemetry \
-  --cpu-telemetry \
   --output-dir "${1}_telemetry" \
   -- \
   apptainer exec \
