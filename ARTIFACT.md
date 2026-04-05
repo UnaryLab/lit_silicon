@@ -18,7 +18,7 @@ tar -xzvf artifact.tar.gz
 cd artifact
 ```
 
-### Github
+### GitHub
 
 Clone the repository with submodules
 
@@ -27,11 +27,11 @@ git clone https://github.com/UnaryLab/Primus.git --recursive
 cd Primus
 ```
 
-
 ## Install Dependencies
 
 Set up a python virtual environment
 
+### Python Environment
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -45,19 +45,6 @@ Install chopper
 uv pip install third_party/chopper
 ```
 
-## Build Container for Pretraining
-
-The account name will be provided once configured.
-
-```bash
-sbatch -q account_name build.sh
-```
-
-Please wait for the container to finish building.
-You can monitor progress with `tail -f sbatch_primus_*.out`.
-
-## Collect Pretraining traces
-
 ### Huggingface
 
 Request access to [Llama 3.1 8B](https://huggingface.co/meta-llama/Llama-3.1-8B).
@@ -67,22 +54,26 @@ Make sure to export your huggingface key.
 export HF_TOKEN=<key>
 ```
 
-Submit all jobs together and wait for them to complete.
+## Run
+
+This script will submit all jobs needed to build the container, collect the data, and plot figures.
 
 ```bash
-sbatch -q account_name go.sh llama_red
-sbatch -q account_name go.sh deepseek_red
-sbatch -q account_name go.sh llama_realloc
-sbatch -q account_name go.sh llama_slosh
+./submit_all.sh account_name
 ```
 
-## Generate figures
+Once all jobs are completed, compare the following images with figures in the paper:
 
-```bash
-sbatch -q account_name plot.sh
-```
+- Figure 16
+  a) deepseek_llama_straggler_per_gpu.png
+  b) deepseek_llama_lead_and_throughput.png
+  c) deepseek_llama_avg_pow_freq.png
 
-# TODO
+- Figure 9
+  a) red_realloc_slosh_lead_and_throughput.png
+  b) red_realloc_slosh_freq_pow.png
 
-- [ ] add GPU-Realloc vs GPU-Red vs CPU-Slosh
-- [ ] add final power distribution
+## TODO
+
+- [ ] add raw data
+- [ ] add script for generating every figure, and its corresponding match in the paper
