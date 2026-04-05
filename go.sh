@@ -21,6 +21,8 @@ elif [[ "$1" == "llama_realloc" ]]; then
   CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-GPU-Realloc.yaml"
 elif [[ "$1" == "llama_slosh" ]]; then
   CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-CPU-Slosh.yaml"
+elif [[ "$1" == "llama_untuned" ]]; then
+  CONFIG="examples/torchtitan/configs/MI300X/llama3.1_8B-BF16-pretrain-untuned.yaml"
 elif [[ "$1" == "deepseek_red" ]]; then
   CONFIG="examples/torchtitan/configs/MI300X/deepseek_v3_16b-BF16-pretrain-GPU-Red.yaml"
 else

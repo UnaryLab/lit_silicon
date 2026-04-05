@@ -9,7 +9,4 @@
 
 set -eux
 
-SLURM_SUBMIT_DIR=${PWD:-}
-cd $SLURM_SUBMIT_DIR
-
 apptainer build --rocm -F primus.sif primus.def

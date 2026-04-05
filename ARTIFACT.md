@@ -67,21 +67,19 @@ Make sure to export your huggingface key.
 export HF_TOKEN=<key>
 ```
 
-Submit both jobs and wait for completion.
+Submit all jobs together and wait for them to complete.
 
 ```bash
 sbatch -q account_name go.sh llama_red
+sbatch -q account_name go.sh deepseek_red
 sbatch -q account_name go.sh llama_realloc
 sbatch -q account_name go.sh llama_slosh
-sbatch -q account_name go.sh deepseek
 ```
 
 ## Generate figures
 
 ```bash
-python -m chopper.plots.average_power_freq -g "['outputs/deepseek_red_profile_trace/gpu.pkl','outputs/llama_red_profile_trace/gpu.pkl']" -v "['deepseek','llama']" --starts "[0.1,0.1]" --stops "[0.95,0.95]" --ymaxs "[1.03,1.005]" --ymins "[1,.955]" -p True -f deepseek_llama_avg_pow_freq.png
-python -m chopper.plots.lead_and_throughput -t "['outputs/deepseek_red_profile_trace/ts.pkl','outputs/llama_red_profile_trace/ts.pkl']" --frameworks "[2,2]" -v "['deepseek','llama']" --filename deepseek_llama_lead_and_throughput.png
-python -m chopper.plots.freq_pow -g "['outputs/llama_red_profile_trace/gpu.pkl','outputs/llama_realloc_profile_trace/gpu.pkl','outputs/llama_slosh_profile_trace/gpu.pkl']" -v "['GPU-Red','GPU-Realloc','CPU-Slosh']" -a 0.6 --starts "[.2,.2,.2]" --stops "[1.0,1.0,1.0]" --metrics "['current_gfxclk','current_socket_power']" --metric_y_max "[1.11,1.005]" --metric_y_min "[1,0.935]"
+sbatch -q account_name plot.sh
 ```
 
 # TODO
