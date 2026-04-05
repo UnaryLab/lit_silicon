@@ -19,6 +19,7 @@ modules:
         enable_memory_snapshot: false
         save_memory_snapshot_folder: "memory_snapshot"
         power_man: true
+        max_adj: 8
 
       metrics:
         log_freq: 1
