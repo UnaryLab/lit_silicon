@@ -2,22 +2,6 @@
 
 ## Setup
 
-Choose either method to download the artifact.
-Hotfixes will be applied to the github version, please use the updated README.
-
-### Zendo
-
-Copy the artifact to the hpcfund cluster.
-The username will be provided once access has been configured for reviewers.
-
-```bash
-scp artifact.tar.gz username@hpcfund.amd.com:/work1/diwu/username
-ssh username@hpcfund.amd.com
-cd /work1/diwu/username
-tar -xzvf artifact.tar.gz
-cd artifact
-```
-
 ### GitHub
 
 Clone the repository with submodules
