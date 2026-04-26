@@ -57,10 +57,6 @@ Once all jobs are completed, match the generated plots with their corresponding 
   - a) red_realloc_slosh_lead_and_throughput.png
   - b) red_realloc_slosh_freq_pow.png
 
-## TODO
-
-- [ ] add raw data
-- [ ] add script for generating every figure, and its corresponding match in the paper
 
 ## Citation
 
