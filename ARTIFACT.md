@@ -7,8 +7,8 @@
 Clone the repository with submodules
 
 ```bash
-git clone https://github.com/UnaryLab/Primus.git --recursive
-cd Primus
+git clone https://github.com/UnaryLab/lit_silicon_tuning_amd.git --recursive
+cd lit_silicon_tuning_amd
 ```
 
 Set up a python virtual environment
@@ -61,3 +61,14 @@ Once all jobs are completed, match the generated plots with their corresponding 
 
 - [ ] add raw data
 - [ ] add script for generating every figure, and its corresponding match in the paper
+
+## Citation
+
+```
+@article{kurzynski2025lit,
+  title={Lit Silicon: A Case Where Thermal Imbalance Couples Concurrent Execution in Multiple GPUs},
+  author={Kurzynski, Marco and Aga, Shaizeen and Wu, Di},
+  journal={arXiv preprint arXiv:2511.09861},
+  year={2025}
+}
+```
