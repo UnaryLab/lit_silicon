@@ -61,10 +61,10 @@ Once all jobs are completed, match the generated plots with their corresponding 
 ## Citation
 
 ```
-@article{kurzynski2025lit,
-  title={Lit Silicon: A Case Where Thermal Imbalance Couples Concurrent Execution in Multiple GPUs},
-  author={Kurzynski, Marco and Aga, Shaizeen and Wu, Di},
-  journal={arXiv preprint arXiv:2511.09861},
-  year={2025}
+@inproceedings{2026isca_litsilicon,
+  author    = {Marco Kurzynski and Shaizeen Aga and Di Wu},
+  title     = {{Lit Silicon: A Case Where Thermal Imbalance Couples Concurrent Execution in Multiple GPUs}},
+  booktitle = {International Symposium on Computer Architecture},
+  year      = {2026},
 }
 ```
